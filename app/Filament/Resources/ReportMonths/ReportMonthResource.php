@@ -58,4 +58,45 @@ class ReportMonthResource extends Resource
             'edit' => EditReportMonth::route('/{record}/edit'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAnyRole([
+            'superadmin',
+            'admin',
+            'staff',
+            'kepala_pengasuhan',
+        ]);
+    }
+
+    public static function canView($record): bool
+    {
+        return auth()->user()->hasAnyRole([
+            'superadmin',
+            'admin',
+            'staff',
+            'kepala_pengasuhan',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can(['']);
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->user()->can('');
+    }
+
 }

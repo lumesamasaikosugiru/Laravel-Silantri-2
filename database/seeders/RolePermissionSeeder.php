@@ -32,6 +32,7 @@ class RolePermissionSeeder extends Seeder
         $permissions = [
             'manage users',
             'manage santri',
+            'manage santri sick',
             'manage master data',
 
             'create santri sick',
@@ -54,6 +55,7 @@ class RolePermissionSeeder extends Seeder
         Role::findByName('admin')->givePermissionTo([
             'manage users',
             'manage santri',
+            'manage santri sick',
             'manage master data',
         ]);
 

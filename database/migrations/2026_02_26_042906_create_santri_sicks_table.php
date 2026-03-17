@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('santri_id')->constrained('santris')->cascadeOnDelete();
             $table->date('date_sick');
+            $table->unique(['santri_id', 'date_sick'], 'santri_sick_unique');
             $table->date('date_recovered');
             $table->string('diagnose', 50);
             $table->text('description')->nullable();

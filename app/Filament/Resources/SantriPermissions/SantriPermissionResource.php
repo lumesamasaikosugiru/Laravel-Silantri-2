@@ -59,4 +59,44 @@ class SantriPermissionResource extends Resource
             'edit' => EditSantriPermission::route('/{record}/edit'),
         ];
     }
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAnyRole([
+            'superadmin',
+            'admin',
+            'staff',
+            'kepala_pengasuhan',
+        ]);
+    }
+
+    public static function canView($record): bool
+    {
+        return auth()->user()->hasAnyRole([
+            'superadmin',
+            'admin',
+            'staff',
+            'kepala_pengasuhan',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
 }
