@@ -81,22 +81,22 @@ class ReportMonthResource extends Resource
 
     public static function canCreate(): bool
     {
-        return auth()->user()->can(['']);
+        return auth()->user()->can(['create report month']);
     }
 
     public static function canEdit($record): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('edit report month');
     }
 
     public static function canDelete($record): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('delete report month');
     }
 
     public static function canDeleteAny(): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('delete report month');
     }
 
 }

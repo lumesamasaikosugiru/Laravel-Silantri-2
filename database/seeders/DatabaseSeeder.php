@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             SantriSickSeeder::class,
             SantriPermissionSeeder::class,
             SantriViolationSeeder::class,
+            ReportMonthSeeder::class,
         ]);
     }
 }

@@ -81,22 +81,22 @@ class SantriSickResource extends Resource
 
     public static function canCreate(): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('create santri sick');
     }
 
     public static function canEdit($record): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('edit santri sick');
     }
 
     public static function canDelete($record): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('delete santri sick');
     }
 
     public static function canDeleteAny(): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('delete santri sick');
     }
 
 }

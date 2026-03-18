@@ -32,15 +32,24 @@ class RolePermissionSeeder extends Seeder
         $permissions = [
             'manage users',
             'manage santri',
-            'manage santri sick',
             'manage master data',
 
+            'delete santri violation',
+            'create santri violation',
+            'edit santri violation',
+
+            'delete santri sick',
+            'edit santri sick',
             'create santri sick',
             'update santri sick',
 
+            'delete santri permission',
+            'edit santri permission',
             'create santri permission',
             'approve santri permission',
 
+            'edit report month',
+            'delete report month',
             'create report month',
             'approve report month',
         ];
@@ -55,14 +64,22 @@ class RolePermissionSeeder extends Seeder
         Role::findByName('admin')->givePermissionTo([
             'manage users',
             'manage santri',
-            'manage santri sick',
             'manage master data',
         ]);
 
         Role::findByName('staff')->givePermissionTo([
             'create santri sick',
+            // 'edit santri sick',
+
             'create santri permission',
+            // 'edit santri permission',
+
+            'create santri violation',
+            // 'edit santri violation',
+
             'create report month',
+            'edit report month',
+
         ]);
 
         Role::findByName('kepala_pengasuhan')->givePermissionTo([

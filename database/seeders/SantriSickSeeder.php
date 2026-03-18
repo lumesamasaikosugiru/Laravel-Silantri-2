@@ -16,7 +16,6 @@ class SantriSickSeeder extends Seeder
             [
                 'santri_id' => '1',
                 'date_sick' => '2026-02-13',
-                'date_recovered' => '2026-02-15',
                 'diagnose' => 'Sakit Magh',
                 'description' => 'Sakit Magh tingkat menengah',
                 'inputed_by' => '3',
@@ -24,7 +23,6 @@ class SantriSickSeeder extends Seeder
             [
                 'santri_id' => '1',
                 'date_sick' => '2026-02-16',
-                'date_recovered' => '2026-02-17',
                 'diagnose' => 'Sakit Magh',
                 'description' => 'Sakit Magh tingkat menengah',
                 'inputed_by' => '3',
@@ -32,7 +30,6 @@ class SantriSickSeeder extends Seeder
             [
                 'santri_id' => '2',
                 'date_sick' => '2026-02-16',
-                'date_recovered' => '2026-02-17',
                 'diagnose' => 'Migran',
                 'description' => 'Sakit migran tingkat menengah',
                 'inputed_by' => '3',
@@ -40,7 +37,6 @@ class SantriSickSeeder extends Seeder
             [
                 'santri_id' => '3',
                 'date_sick' => '2026-02-16',
-                'date_recovered' => '2026-02-17',
                 'diagnose' => 'Migran',
                 'description' => 'Sakit migran tingkat menengah',
                 'inputed_by' => '3',

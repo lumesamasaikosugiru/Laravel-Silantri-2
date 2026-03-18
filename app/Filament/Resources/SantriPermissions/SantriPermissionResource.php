@@ -81,22 +81,22 @@ class SantriPermissionResource extends Resource
 
     public static function canCreate(): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('create santri permission');
     }
 
     public static function canEdit($record): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('edit santri permission');
     }
 
     public static function canDelete($record): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('delete santri permission');
     }
 
     public static function canDeleteAny(): bool
     {
-        return auth()->user()->can('manage santri');
+        return auth()->user()->can('delete santri permission');
     }
 
 }

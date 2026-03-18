@@ -52,17 +52,21 @@ class User extends Authenticatable
 
     public function santriSicks(): HasMany
     {
-        return $this->hasMany(SantriSick::class, 'user_id');
+        return $this->hasMany(SantriSick::class, 'inputed_by');
+    }
+    public function santriConfirms(): HasMany
+    {
+        return $this->hasMany(SantriSick::class, 'confirmed_by');
     }
 
     public function santriViolationDetails(): HasMany
     {
-        return $this->hasMany(ViolationDetail::class, 'user_id');
+        return $this->hasMany(ViolationDetail::class, 'inputed_by');
     }
 
     public function santriPermissionInputs(): HasMany
     {
-        return $this->hasMany(SantriPermission::class, 'user_id');
+        return $this->hasMany(SantriPermission::class, 'inputed_by');
     }
 
     public function santriPermissionApproveds(): HasMany
