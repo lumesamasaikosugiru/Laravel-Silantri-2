@@ -23,7 +23,7 @@ class SantriSick extends Model
         return $this->belongsTo(Santri::class, 'santri_id');
     }
 
-    public function confirmed_by(): BelongsTo
+    public function confirmed(): BelongsTo
     {
         return $this->belongsTo(User::class, 'confirmed_by');
     }

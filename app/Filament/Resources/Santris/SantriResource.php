@@ -76,6 +76,7 @@ class SantriResource extends Resource
         return auth()->user()->hasAnyRole([
             'superadmin',
             'admin',
+            'staff',
             'kepala_pengasuhan',
         ]);
     }

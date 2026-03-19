@@ -26,7 +26,7 @@ class SantriSickResource extends Resource
 
     protected static ?int $navigationSort = 2;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocument;
-    protected static ?string $recordTitleAttribute = 'santri_id';
+    protected static ?string $recordTitleAttribute = 'date_sick';
 
     public static function form(Schema $schema): Schema
     {

@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('address_city', 50);
             $table->foreignId('classroom_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('status', ['active', 'nonactive'])->default('active');
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }
