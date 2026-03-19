@@ -26,6 +26,7 @@ class SantriSickForm
                             ->label('Nama Santri')
                             ->placeholder('Pilih Santri')
                             ->relationship('santri', 'name')
+                            ->prefixIcon(Heroicon::OutlinedUser)
                             ->required()
                             ->preload()
                             ->searchable()
@@ -43,7 +44,7 @@ class SantriSickForm
 
                 Section::make('Informasi Detail')
                     ->schema([
-                        TextInput::make('diagnose')
+                        Textarea::make('diagnose')
                             ->label('Diagnosa')
                             ->placeholder('Tulis diagnosa singkat..')
                             ->required(),
