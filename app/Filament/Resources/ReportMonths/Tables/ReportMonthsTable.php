@@ -35,6 +35,22 @@ class ReportMonthsTable
             ->send();
     }
 
+
+    public static function markAsRejected(Model $record, array $data): void
+    {
+        $record->update([
+            'status' => 'ditolak',
+            'note_validation' => $data['note_validation'],
+            'validated_by' => auth()->id(),
+            'validated_date' => now(),
+        ]);
+
+        Notification::make()
+            ->title('Ditolak')
+            ->danger()
+            ->send();
+    }
+
     public static function configure(Table $table): Table
     {
         return $table
@@ -96,12 +112,31 @@ class ReportMonthsTable
                             self::markAsValidated($record, $data);
                         }),
 
+                    Action::make('rejecting')
+                        ->label('Tolak')
+                        ->visible(fn(Model $record) => auth()->user()->can('approve report month') && in_array($record->status, ['menunggu']))
+                        ->color(Color::Rose)
+                        ->icon(Heroicon::HandThumbDown)
+                        ->requiresConfirmation()
+                        ->modalHeading('Konfirmasi Laporan Bulanan')
+                        ->modalDescription('Apakah laporan bulanan sudah oke? ')
+                        ->modalSubmitActionLabel('Tidak, belum')
+                        ->form([
+                            Textarea::make('note_validation')
+                                ->placeholder('Tambah Catatan.. ')
+                        ])
+                        ->action(function (Model $record, array $data) {
+                            self::markAsRejected($record, $data);
+                        }),
+
                     ViewAction::make(),
                     EditAction::make()
                         ->visible(fn() => auth()->user()->can('edit report month')),
                     DeleteAction::make()
                         ->visible(fn() => auth()->user()->can('delete report month')),
-                ])->label('Aksi')
+                ])
+                    ->visible(fn(Model $record) => in_array($record->status, ['menunggu']))
+                    ->label('Aksi')
                     ->icon(Heroicon::PencilSquare),
             ])
             ->toolbarActions([

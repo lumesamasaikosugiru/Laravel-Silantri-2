@@ -113,10 +113,10 @@ class SantriPermissionsTable
                     ->label('Diinput Oleh')
                     ->sortable(),
                 TextColumn::make('santriPermissionApproved.name')
-                    ->label('Disetujui Oleh')
+                    ->label('Diputuskan Oleh')
                     ->sortable(),
                 TextColumn::make('date_approved')
-                    ->label('Tanggal Disetujui')
+                    ->label('Tanggal Keputusan')
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')
