@@ -8,14 +8,45 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Support\Colors\Color;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class SantriPermissionsTable
 {
+
+    public static function markAsApproved(Model $record): void
+    {
+        $record->update([
+            'status' => 'disetujui',
+            'approved_by' => auth()->id(),
+            'date_approved' => now()->toDateString(),
+        ]);
+
+        Notification::make()
+            ->title('Perizinan telah disetujui')
+            ->success()
+            ->send();
+    }
+
+    public static function markAsRejected(Model $record): void
+    {
+        $record->update([
+            'status' => 'ditolak',
+            'approved_by' => auth()->id(),
+            'date_approved' => now()->toDateString(),
+        ]);
+
+        Notification::make()
+            ->title('Perizinan ditolak')
+            ->danger()
+            ->send();
+    }
+
     public static function configure(Table $table): Table
     {
         return $table
@@ -105,7 +136,7 @@ class SantriPermissionsTable
                     [
                         ViewAction::make(),
 
-                        Action::make('markAsApproved')
+                        Action::make('approved')
                             ->label('Setujui')
                             ->color(Color::Green)
                             ->icon(Heroicon::HandThumbUp)
@@ -114,15 +145,9 @@ class SantriPermissionsTable
                             ->modalHeading('Ubah status ijin santri ini')
                             ->modalDescription('Apakah anda yakin perubahan status ini?')
                             ->modalSubmitActionLabel('Ya, Yakin')
-                            ->action(function ($record) {
-                                $record->update([
-                                    'status' => 'disetujui',
-                                    'approved_by' => auth()->id(),
-                                    'date_approved' => now()->toDateString(),
-                                ]);
-                            }),
+                            ->action(fn(Model $record) => self::markAsApproved($record)),
 
-                        Action::make('markAsRejected')
+                        Action::make('rejected')
                             ->label('Tolak')
                             ->color(Color::Rose)
                             ->icon(Heroicon::HandThumbDown)
@@ -131,13 +156,7 @@ class SantriPermissionsTable
                             ->modalHeading('Ubah status ijin santri ini')
                             ->modalDescription('Apakah anda yakin perubahan status ini?')
                             ->modalSubmitActionLabel('Ya, Yakin')
-                            ->action(function ($record) {
-                                $record->update([
-                                    'status' => 'ditolak',
-                                    'approved_by' => auth()->id(),
-                                    'date_approved' => now()->toDateString(),
-                                ]);
-                            }),
+                            ->action(fn(Model $record) => self::markAsRejected($record)),
 
                         EditAction::make()
                             ->visible(fn() => auth()->user()->can('edit santri permission')),

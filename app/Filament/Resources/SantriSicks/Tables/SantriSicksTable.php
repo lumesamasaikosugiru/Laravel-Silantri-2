@@ -9,13 +9,29 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class SantriSicksTable
 {
+
+    public static function marAsRecovered(Model $record): void
+    {
+        $record->update([
+            'date_recovered' => now()->toDateString(),
+            'confirmed_by' => auth()->id(),
+        ]);
+
+        Notification::make()
+            ->title('Alhamdulillah sudah sembuh')
+            ->success()
+            ->send();
+    }
+
     public static function configure(Table $table): Table
     {
         return $table
@@ -59,7 +75,7 @@ class SantriSicksTable
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make(),
-                    Action::make('markAsRecovered')
+                    Action::make('recovered')
                         ->label('Sudah Sembuh')
                         ->color('success')
                         ->icon(Heroicon::SquaresPlus)
@@ -68,12 +84,7 @@ class SantriSicksTable
                         ->modalHeading('Santri ini dinyatakan Sembuh')
                         ->modalDescription('Apakah anda yakin santri sudah sembuh?')
                         ->modalSubmitActionLabel('Ya, Yakin')
-                        ->action(function ($record) {
-                            $record->update([
-                                'date_recovered' => now()->toDateString(),
-                                'confirmed_by' => auth()->id(),
-                            ]);
-                        }),
+                        ->action(fn(Model $record) => self::marAsRecovered($record)),
                     EditAction::make()
                         ->visible(fn() => auth()->user()->can('edit santri sick')),
                     DeleteAction::make()
