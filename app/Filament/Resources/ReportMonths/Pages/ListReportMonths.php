@@ -14,7 +14,9 @@ class ListReportMonths extends ListRecords
     {
         return [
             CreateAction::make()
-                ->visible(fn() => auth()->user()->can('create report month')),
+                ->visible(fn() => auth()->user()->can('create report month'))
+                ->disabled(fn() => now()->day !== 28)
+                ->tooltip(fn() => now()->day !== 28 ? 'Hanya bisa dibuat tanggal 28' : null),
         ];
     }
 }

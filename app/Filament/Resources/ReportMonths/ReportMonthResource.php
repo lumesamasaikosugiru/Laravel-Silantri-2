@@ -6,6 +6,7 @@ use App\Filament\Resources\ReportMonths\Pages\CreateReportMonth;
 use App\Filament\Resources\ReportMonths\Pages\EditReportMonth;
 use App\Filament\Resources\ReportMonths\Pages\ListReportMonths;
 use App\Filament\Resources\ReportMonths\Pages\ViewReportMonth;
+use App\Filament\Resources\ReportMonths\RelationManagers\ReportMonthItemsRelationManager;
 use App\Filament\Resources\ReportMonths\Schemas\ReportMonthForm;
 use App\Filament\Resources\ReportMonths\Schemas\ReportMonthInfolist;
 use App\Filament\Resources\ReportMonths\Tables\ReportMonthsTable;
@@ -45,7 +46,7 @@ class ReportMonthResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ReportMonthItemsRelationManager::class,
         ];
     }
 
