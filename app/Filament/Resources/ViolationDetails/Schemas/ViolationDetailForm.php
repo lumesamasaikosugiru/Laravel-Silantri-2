@@ -3,10 +3,13 @@
 namespace App\Filament\Resources\ViolationDetails\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 class ViolationDetailForm
 {
@@ -14,20 +17,47 @@ class ViolationDetailForm
     {
         return $schema
             ->components([
-                Select::make('santri_id')
-                    ->relationship('santri', 'name')
-                    ->required(),
-                Select::make('violation_id')
-                    ->relationship('violation', 'name')
-                    ->required(),
-                DatePicker::make('date')
-                    ->required(),
-                Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                TextInput::make('inputed_by')
-                    ->numeric()
-                    ->default(null),
-            ]);
+                Section::make('Santri')
+                    ->schema([
+                        Group::make()
+                            ->schema([
+                                Select::make('santri_id')
+                                    ->prefixIcon(Heroicon::OutlinedUser)
+                                    ->label('Nama Santri')
+                                    ->relationship('santri', 'name')
+                                    ->preload()
+                                    ->searchable()
+                                    ->placeholder('Cari santri')
+                                    ->required(),
+                                Select::make('violation_id')
+                                    ->label('Pelanggaran')
+                                    ->relationship('violation', 'name')
+                                    ->preload()
+                                    ->searchable()
+                                    ->placeholder('Pilih jenis pelanggaran')
+                                    ->required(),
+                            ])->columns(2),
+
+                        DatePicker::make('date')
+                            ->label('Tanggal')
+                            ->default(now())
+                            ->native(false)
+                            ->prefixIcon(Heroicon::CalendarDays)
+                            ->required(),
+                    ])->columnSpan(3),
+
+                Section::make('Informasi Detail')
+                    ->schema([
+                        Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->placeholder('Tulis keterangan..')
+                            ->required()
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpan(2),
+                Hidden::make('inputed_by')
+                    ->default(fn() => auth()->id()),
+            ])
+            ->columns(5);
     }
 }

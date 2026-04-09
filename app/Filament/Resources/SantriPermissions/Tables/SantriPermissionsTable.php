@@ -5,7 +5,6 @@ namespace App\Filament\Resources\SantriPermissions\Tables;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -39,11 +38,13 @@ class SantriPermissionsTable
                     ->badge(),
                 TextColumn::make('date_started')
                     ->label('Tanggal Mulai')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i')
+                    ->timezone('Asia/Jakarta')
                     ->sortable(),
                 TextColumn::make('date_ended')
                     ->label('Tanggal Berakhir')
-                    ->dateTime()
+                    ->dateTime('d M Y H:i')
+                    ->timezone('Asia/Jakarta')
                     ->sortable(),
                 TextColumn::make('reason')
                     ->label('Alasan')

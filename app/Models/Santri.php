@@ -43,4 +43,9 @@ class Santri extends Model
     {
         return $this->hasMany(ViolationDetail::class, 'santri_id');
     }
+
+    public function santris(): HasMany
+    {
+        return $this->hasMany(ReportMonthDetail::class, 'santri_id');
+    }
 }

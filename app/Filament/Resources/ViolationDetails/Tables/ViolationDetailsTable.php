@@ -9,6 +9,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -18,21 +19,29 @@ class ViolationDetailsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('santri.file_path')
+                    ->label('Foto'),
                 TextColumn::make('santri.name')
+                    ->label('Nama')
                     ->searchable(),
                 TextColumn::make('violation.name')
+                    ->label('Pelanggaran')
                     ->searchable(),
                 TextColumn::make('date')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
-                TextColumn::make('inputed_by')
+                TextColumn::make('userInput.name')
+                    ->label('Petugas Input')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Diubah')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

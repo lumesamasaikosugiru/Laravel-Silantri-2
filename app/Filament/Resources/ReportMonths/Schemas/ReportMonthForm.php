@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\ReportMonths\Schemas;
 
-use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class ReportMonthForm
@@ -14,26 +14,38 @@ class ReportMonthForm
     {
         return $schema
             ->components([
-                TextInput::make('month')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('year')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('created_by')
-                    ->numeric()
-                    ->default(null),
-                Select::make('status')
-                    ->options(['menunggu' => 'Menunggu', 'divalidasi' => 'Divalidasi', 'ditolak' => 'Ditolak'])
-                    ->default('menunggu')
-                    ->required(),
-                Textarea::make('note_validation')
-                    ->default(null)
-                    ->columnSpanFull(),
-                TextInput::make('validated_by')
-                    ->numeric()
-                    ->default(null),
-                DatePicker::make('validated_date'),
-            ]);
+                Section::make('Buat Laporan Bulanan')
+                    ->schema([
+
+                        Select::make('month')
+                            ->label('Bulan')
+                            ->options([
+                                1 => 'Januari',
+                                2 => 'Februari',
+                                3 => 'Maret',
+                                4 => 'April',
+                                5 => 'Mei',
+                                6 => 'Juni',
+                                7 => 'Juli',
+                                8 => 'Agustus',
+                                9 => 'September',
+                                10 => 'Oktober',
+                                11 => 'November',
+                                12 => 'Desember',
+                            ])
+                            ->placeholder('--Pilih bulan--')
+                            ->required(),
+                        TextInput::make('year')
+                            ->label('Tahun')
+                            ->required()
+                            ->numeric(),
+                    ])
+                    ->columns(1)
+                    ->columnSpan(2),
+
+                Hidden::make('created_by')
+                    ->default(fn() => auth()->id()),
+            ])
+            ->columns(4);
     }
 }

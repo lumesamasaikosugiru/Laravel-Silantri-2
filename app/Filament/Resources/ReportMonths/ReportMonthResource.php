@@ -25,7 +25,7 @@ class ReportMonthResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Reports';
     protected static ?int $navigationSort = 7;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
-    protected static ?string $recordTitleAttribute = 'month';
+    protected static ?string $recordTitleAttribute = 'month_name';
 
     public static function form(Schema $schema): Schema
     {
