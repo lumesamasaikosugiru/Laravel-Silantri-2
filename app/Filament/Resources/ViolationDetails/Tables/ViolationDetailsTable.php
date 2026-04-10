@@ -27,6 +27,9 @@ class ViolationDetailsTable
                 TextColumn::make('violation.name')
                     ->label('Pelanggaran')
                     ->searchable(),
+                TextColumn::make('violation.point')
+                    ->label('Point')
+                    ->searchable(),
                 TextColumn::make('date')
                     ->label('Tanggal')
                     ->date()

@@ -66,7 +66,7 @@ class ReportMonthsTable
                     ->label('Petugas Input')
                     ->sortable(),
                 TextColumn::make('status')
-                    ->label('Petugas Input')
+                    ->label('Status Persetujuan')
                     ->formatStateUsing(fn($state) => strtoupper($state))
                     ->color(fn($state) => match ($state) {
                         'menunggu' => Color::Blue,
