@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\KepalaStats;
+use App\Filament\Widgets\PendingApprovalList;
+use App\Filament\Widgets\PendingReportMonth;
 use App\Filament\Widgets\SuperAdminStats;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -40,6 +42,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
+                PendingReportMonth::class,
+                PendingApprovalList::class,
                 KepalaStats::class,
                 SuperAdminStats::class,
                 AccountWidget::class,

@@ -50,13 +50,30 @@ class ReportMonthsTable
             ->danger()
             ->send();
     }
-
     public static function configure(Table $table): Table
     {
+        function getMonthName($month)
+        {
+            return [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember',
+            ][$month] ?? '-';
+        }
         return $table
             ->columns([
                 TextColumn::make('month')
                     ->label('Bulan')
+                    ->description(fn($record) => getMonthName($record->month))
                     ->icon(Heroicon::CalendarDateRange)
                     ->sortable(),
                 TextColumn::make('year')
