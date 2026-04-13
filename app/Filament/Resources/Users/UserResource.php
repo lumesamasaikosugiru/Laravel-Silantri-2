@@ -65,7 +65,6 @@ class UserResource extends Resource
     {
         return auth()->user()->hasAnyRole([
             'superadmin',
-            'admin',
         ]);
     }
 
@@ -73,28 +72,27 @@ class UserResource extends Resource
     {
         return auth()->user()->hasAnyRole([
             'superadmin',
-            'admin',
         ]);
     }
 
     public static function canCreate(): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('manage users');
     }
 
     public static function canEdit($record): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('manage users');
     }
 
     public static function canDelete($record): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('manage users');
     }
 
     public static function canDeleteAny(): bool
     {
-        return auth()->user()->can('');
+        return auth()->user()->can('manage users');
     }
 
 }

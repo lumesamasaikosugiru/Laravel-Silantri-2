@@ -25,8 +25,8 @@ class StafStats extends BaseWidget
         return [
             Group::make()
                 ->schema([
-                    Stat::make('Total Santri', Santri::count())
-                        ->description('Jumlah seluruh santri')
+                    Stat::make('Santri', Santri::where('status', 'active')->count())
+                        ->description('Jumlah seluruh santri aktif')
                         ->descriptionIcon(Heroicon::OutlinedUsers, IconPosition::Before)
                         ->color('primary'),
                     Stat::make('Santri Sakit Aktif', $countSantriSick)

@@ -4,6 +4,7 @@ namespace App\Filament\Widgets;
 
 use App\Models\Santri;
 use App\Models\ReportMonth;
+use App\Models\User;
 use App\Models\ViolationDetail;
 use App\Models\SantriSick;
 use App\Models\SantriPermission;
@@ -24,20 +25,21 @@ class SuperAdminStats extends BaseWidget
         $countReportMonth = ReportMonth::where('status', 'menunggu')->count();
         $countSantriSick = SantriSick::whereNull('date_recovered')->count();
         $countViolation = ViolationDetail::whereMonth('date', Carbon::now())->count();
+        $countActiveUser = User::where('is_active', true)->count();
 
         return [
             Group::make()
                 ->schema([
-                    Stat::make('Total Santri', Santri::count())
-                        ->description('Jumlah seluruh santri')
+                    Stat::make('Santri', Santri::where('status', 'active')->count())
+                        ->description('Jumlah seluruh santri aktif')
                         ->descriptionIcon(Heroicon::OutlinedUsers, IconPosition::Before)
                         ->color('primary'),
 
-                    Stat::make('Santri Sakit Aktif', $countSantriSick)
-                        ->description($countSantriSick > 0 ? 'Belum sembuh' : 'Alhamdulillah seluruh santri sehat')
-                        ->descriptionIcon($countSantriSick > 0 ? Heroicon::OutlinedFaceFrown : Heroicon::OutlinedFaceSmile, IconPosition::Before)
-                        ->color($countSantriSick > 0 ? Color::Blue : 'primary')
-                        ->url($countSantriSick > 0 ? route('filament.admin.resources.santri-sicks.index') : ''),
+                    Stat::make('Pengguna Aktif', $countActiveUser)
+                        ->description($countActiveUser > 0 ? 'Total pengguna aktif' : 'Tidak ada data user')
+                        ->descriptionIcon($countActiveUser > 0 ? Heroicon::OutlinedUserCircle : Heroicon::OutlinedUserPlus, IconPosition::Before)
+                        ->color($countActiveUser > 0 ? Color::Blue : 'primary')
+                        ->url($countActiveUser > 0 ? route('filament.admin.resources.users.index') : ''),
                 ]),
 
             Group::make()

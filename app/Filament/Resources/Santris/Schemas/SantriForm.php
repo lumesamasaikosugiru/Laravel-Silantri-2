@@ -26,7 +26,7 @@ class SantriForm
                                 FileUpload::make('file_path')
                                     ->hiddenLabel()
                                     ->directory('FotoSantri')
-                                    ->required(),
+                                    ->required(fn($operation) => $operation === 'create'),
                             ])
                             ->columns(1)
                             ->columnSpan(1),

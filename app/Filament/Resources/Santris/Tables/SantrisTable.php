@@ -57,6 +57,7 @@ class SantrisTable
                     ->label('Kelas')
                     ->searchable(),
                 TextColumn::make('status')
+                    ->formatStateUsing(fn($state) => strtoupper($state))
                     ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()

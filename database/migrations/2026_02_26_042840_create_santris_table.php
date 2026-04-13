@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->foreignId('classroom_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('status', ['active', 'nonactive'])->default('active');
             $table->string('file_path')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

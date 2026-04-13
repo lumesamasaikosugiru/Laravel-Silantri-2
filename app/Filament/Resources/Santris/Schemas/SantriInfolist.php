@@ -81,6 +81,12 @@ class SantriInfolist
                             ])
                             ->columns(3),
 
+                        Fieldset::make('Keterangan lain')
+                            ->schema([
+                                TextEntry::make('description')
+                                    ->hiddenLabel()
+                            ])
+
                     ])
                     ->columnSpan(3)
 
