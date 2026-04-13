@@ -55,7 +55,6 @@ class SantriPermissionInfolist
                             ->schema([
                                 TextEntry::make('santriReqPermission.name')
                                     ->weight('bold')
-                                    ->badge()
                                     ->label('Nama Santri'),
                                 TextEntry::make('type')
                                     ->label('Jenis Perijinan')
@@ -98,9 +97,11 @@ class SantriPermissionInfolist
                                     })
                                     ->badge(),
                                 TextEntry::make('santriPermissionInput.name')
-                                    ->label('Diinput Oleh'),
+                                    ->label('Diinput Oleh')
+                                    ->placeholder('Publik : Wali Santri'),
                                 TextEntry::make('wali_name')
                                     ->label('Nama Wali')
+                                    ->weight('bold')
                                     ->placeholder('tidak ada data karena diajukan oleh staf'),
                                 TextEntry::make('wali_phone')
                                     ->label('Kontak Wali')
@@ -108,6 +109,12 @@ class SantriPermissionInfolist
                                 TextEntry::make('wali_relation')
                                     ->label('Hubungan Wali')
                                     ->badge()
+                                    ->formatStateUsing(fn($state) => strtoupper($state))
+                                    ->color(fn($state) => match ($state) {
+                                        'orangtua' => Color::Green,
+                                        'saudara_kandung' => Color::Teal,
+                                        'saudara_keluarga' => Color::Green,
+                                    })
                                     ->placeholder('tidak ada data karena diajukan oleh staf'),
                             ])
                             ->columns(3),

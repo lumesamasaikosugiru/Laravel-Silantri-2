@@ -20,6 +20,7 @@ class Santri extends Model
             'classroom_id',
             'status',
             'file_path',
+            'description',
         ];
 
     public function classroom(): BelongsTo
