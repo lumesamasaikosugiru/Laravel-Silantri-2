@@ -14,7 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('santri_id')->constrained('santris')->cascadeOnDelete();
             $table->enum('type', ['pulang', 'keluar', 'lainnya']);
+            $table->string('ticket_permission');
             $table->dateTime('date_started');
+            $table->unique(['santri_id', 'date_started', 'ticket_permission'], 'santri_perm_unique');
             $table->dateTime('date_ended');
             $table->string('reason', 50);
             $table->enum('submitted_by', ['wali_santri', 'staf']);

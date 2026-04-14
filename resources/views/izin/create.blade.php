@@ -12,6 +12,15 @@
         </div>
     @endif
 
+    @if(session('ticket'))
+        <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
+            Pengajuan berhasil! <br>
+            Kode Tracking Anda:
+            <strong class="text-lg">{{ session('ticket') }}</strong> <br>
+            Simpan kode ini untuk mengecek Pengajuan perizinan Santri!
+        </div>
+    @endif
+
     <form method="POST" action="/izin-santri" class="space-y-4">
         @csrf
 
@@ -84,5 +93,6 @@
         </button>
 
     </form>
+
 
 @endsection

@@ -51,9 +51,10 @@ class SantriPermissionsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('santriReqPermission.file_path')
-                    ->imageSize(50)
-                    ->label('Foto'),
+                TextColumn::make('ticket_permission')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Kode Perizinan'),
                 TextColumn::make('santriReqPermission.name')
                     ->label('Nama')
                     ->sortable(),

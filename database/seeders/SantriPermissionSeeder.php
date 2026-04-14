@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SantriPermissionSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class SantriPermissionSeeder extends Seeder
             [
                 'santri_id' => '1',
                 'type' => 'keluar',
+                'ticket_permission' => 'IZIN-' . Carbon::now()->year . '-' . Str::upper(Str::random(8)),
                 'date_started' => '2026-03-13',
                 'date_ended' => '2026-03-13',
                 'reason' => 'Beli peralatan sholat',
@@ -27,6 +29,7 @@ class SantriPermissionSeeder extends Seeder
             [
                 'santri_id' => '1',
                 'type' => 'pulang',
+                'ticket_permission' => 'IZIN-' . Carbon::now()->year . '-' . Str::upper(Str::random(8)),
                 'date_started' => '2026-03-13',
                 'date_ended' => '2026-03-20',
                 'reason' => 'Kelurga Berpulang',
@@ -37,6 +40,7 @@ class SantriPermissionSeeder extends Seeder
             [
                 'santri_id' => '2',
                 'type' => 'pulang',
+                'ticket_permission' => 'IZIN-' . Carbon::now()->year . '-' . Str::upper(Str::random(8)),
                 'date_started' => '2026-03-14',
                 'date_ended' => '2026-03-14',
                 'reason' => 'Beli peralatan mandi',
@@ -47,6 +51,7 @@ class SantriPermissionSeeder extends Seeder
             [
                 'santri_id' => '3',
                 'type' => 'pulang',
+                'ticket_permission' => 'IZIN-' . Carbon::now()->year . '-' . Str::upper(Str::random(8)),
                 'date_started' => '2026-03-14',
                 'date_ended' => '2026-03-14',
                 'reason' => 'Beli peralatan mandi',

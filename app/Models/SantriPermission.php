@@ -12,6 +12,7 @@ class SantriPermission extends Model
             'santri_id',
             'type_permission',
             'date_started',
+            'ticket_permission',
             'date_ended',
             'reason',
             'submitted_by',

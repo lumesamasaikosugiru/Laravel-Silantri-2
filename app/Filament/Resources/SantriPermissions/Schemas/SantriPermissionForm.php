@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SantriPermissions\Schemas;
 
+use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
@@ -13,6 +14,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Str;
 
 class SantriPermissionForm
 {
@@ -31,11 +33,22 @@ class SantriPermissionForm
                             ->prefixIcon(Heroicon::OutlinedUser)
                             ->label('Nama')
                             ->required(),
-                        Select::make('type')
-                            ->label('Jenis ijin')
-                            ->placeholder('Pilih jenis perijinan')
-                            ->options(['pulang' => 'Pulang', 'keluar' => 'Keluar', 'lainnya' => 'Lainnya'])
-                            ->required(),
+
+                        Group::make()
+                            ->schema([
+                                Select::make('type')
+                                    ->label('Jenis ijin')
+                                    ->placeholder('--Pilih jenis perijinan--')
+                                    ->options(['pulang' => 'Pulang', 'keluar' => 'Keluar', 'lainnya' => 'Lainnya'])
+                                    ->required(),
+                                TextInput::make('ticket_permission')
+                                    ->label('Tiket Perizinan (dibuat otomatis)')
+                                    ->default('IZIN-' . Carbon::now()->year . '-' . Str::upper(Str::random(8)))
+                                    ->unique()
+                                    ->readOnly(),
+                            ])
+                            ->columns(2),
+
                         Group::make()
                             ->schema([
                                 DatePicker::make('date_started')

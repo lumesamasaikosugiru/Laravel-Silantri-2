@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Santri;
 use App\Models\SantriPermission;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SantriPermissionController extends Controller
 {
@@ -17,6 +19,9 @@ class SantriPermissionController extends Controller
 
     public function store(Request $request)
     {
+
+
+
         $request->validate([
             'santri_id' => 'required|exists:santris,id',
             'type' => 'required',
@@ -28,6 +33,12 @@ class SantriPermissionController extends Controller
             'wali_relation' => 'required',
         ]);
 
+        do {
+            $ticket = 'IZIN-' . Carbon::now()->year . '-' . Str::upper(Str::random(8));
+        } while (
+            SantriPermission::where('ticket_permission', $ticket)->exists()
+        );
+
         SantriPermission::create([
             'santri_id' => $request->santri_id,
             'type' => $request->type,
@@ -35,7 +46,8 @@ class SantriPermissionController extends Controller
             'date_ended' => $request->date_ended,
             'reason' => $request->reason,
 
-            // 🔥 penting
+            'ticket_permission' => $ticket,
+
             'submitted_by' => 'wali_santri',
 
             'wali_name' => $request->wali_name,
@@ -44,10 +56,35 @@ class SantriPermissionController extends Controller
 
             'status' => 'menunggu',
 
-            // staff kosong
             'user_id' => null,
         ]);
 
-        return redirect()->back()->with('success', 'Pengajuan berhasil dikirim!');
+        return back()->with('ticket', $ticket);
     }
+
+    //tracking ijin dari wali santri
+    public function trackingForm()
+    {
+        return view('izin.tracking');
+    }
+
+
+    public function trackingResult(Request $request)
+    {
+        $request->validate([
+            'ticket_permission' => 'required'
+        ]);
+
+        $data = SantriPermission::where('ticket_permission', $request->ticket_permission)
+            ->first();
+
+        return redirect('/cek-izin')->with('data', $data);
+    }
+    public function showTracking($ticket)
+    {
+        $data = SantriPermission::where('ticket_permission', $ticket)->first();
+
+        return view('izin.tracking', compact('data'));
+    }
+
 }

@@ -52,9 +52,8 @@ class PendingApprovalList extends BaseWidget
                     ->label('Selesai')
                     ->date(),
 
-                TextColumn::make('status')
+                TextColumn::make('ticket_permission')
                     ->badge()
-                    ->formatStateUsing(fn($state) => strtoupper($state))
                     ->color(Color::Blue),
             ])
             ->actions([
