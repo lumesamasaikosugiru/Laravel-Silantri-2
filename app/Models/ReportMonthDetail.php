@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use function PHPUnit\Framework\returnArgument;
 
 class ReportMonthDetail extends Model
 {
@@ -22,5 +23,14 @@ class ReportMonthDetail extends Model
     {
         return $this->belongsTo(ReportMonth::class, 'report_month_id');
 
+    }
+
+    public function santri(): BelongsTo
+    {
+        return $this->belongsTo(Santri::class, 'santri_id');
+    }
+    public function getSantriNameAttribute(): string
+    {
+        return $this->santri->name;
     }
 }

@@ -1,0 +1,166 @@
+<?php
+
+namespace App\Filament\Resources\ReportMonths\Tables;
+
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
+use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+
+class ReportMonthsTable
+{
+
+    public static function markAsValidated(Model $record, array $data): void
+    {
+        $record->update([
+            'status' => 'divalidasi',
+            'note_validation' => $data['note_validation'],
+            'validated_by' => auth()->id(),
+            'validated_date' => now(),
+        ]);
+
+        Notification::make()
+            ->title('Divalidasi')
+            ->success()
+            ->send();
+    }
+
+
+    public static function markAsRejected(Model $record, array $data): void
+    {
+        $record->update([
+            'status' => 'ditolak',
+            'note_validation' => $data['note_validation'],
+            'validated_by' => auth()->id(),
+            'validated_date' => now(),
+        ]);
+
+        Notification::make()
+            ->title('Ditolak')
+            ->danger()
+            ->send();
+    }
+    public static function configure(Table $table): Table
+    {
+        function getMonthName($month)
+        {
+            return [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember',
+            ][$month] ?? '-';
+        }
+        return $table
+            ->columns([
+                TextColumn::make('month')
+                    ->label('Bulan')
+                    ->description(fn($record) => getMonthName($record->month))
+                    ->icon(Heroicon::CalendarDateRange)
+                    ->sortable(),
+                TextColumn::make('year')
+                    ->label('Tahun')
+                    ->sortable(),
+                TextColumn::make('reportMonthInput.name')
+                    ->label('Petugas Input')
+                    ->sortable(),
+                TextColumn::make('status')
+                    ->label('Status Persetujuan')
+                    ->formatStateUsing(fn($state) => strtoupper($state))
+                    ->color(fn($state) => match ($state) {
+                        'menunggu' => Color::Blue,
+                        'divalidasi' => Color::Green,
+                        'ditolak' => Color::Rose,
+                    })
+                    ->badge(),
+                TextColumn::make('reportMonthValidate.name')
+                    ->label('Divalidasi Oleh')
+                    ->sortable(),
+                TextColumn::make('validated_date')
+                    ->label('Tanggal Validasi')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                ActionGroup::make([
+                    Action::make('validating')
+                        ->label('Validasi')
+                        ->visible(fn(Model $record) => auth()->user()->can('approve report month') && in_array($record->status, ['menunggu']))
+                        ->color(Color::Green)
+                        ->icon(Heroicon::HandThumbUp)
+                        ->requiresConfirmation()
+                        ->modalHeading('Konfirmasi Laporan Bulanan')
+                        ->modalDescription('Apakah laporan bulanan sudah oke?')
+                        ->modalSubmitActionLabel('Ya, sudah')
+                        ->form([
+                            Textarea::make('note_validation')
+                                ->placeholder('Tambah Catatan..')
+                        ])
+                        ->action(function (Model $record, array $data) {
+                            self::markAsValidated($record, $data);
+                        }),
+
+                    Action::make('rejecting')
+                        ->label('Tolak')
+                        ->visible(fn(Model $record) => auth()->user()->can('approve report month') && in_array($record->status, ['menunggu']))
+                        ->color(Color::Rose)
+                        ->icon(Heroicon::HandThumbDown)
+                        ->requiresConfirmation()
+                        ->modalHeading('Konfirmasi Laporan Bulanan')
+                        ->modalDescription('Apakah laporan bulanan sudah oke? ')
+                        ->modalSubmitActionLabel('Tidak, belum')
+                        ->form([
+                            Textarea::make('note_validation')
+                                ->placeholder('Tambah Catatan.. ')
+                        ])
+                        ->action(function (Model $record, array $data) {
+                            self::markAsRejected($record, $data);
+                        }),
+
+                    ViewAction::make(),
+                    EditAction::make()
+                        ->visible(fn() => auth()->user()->can('edit report month')),
+                    DeleteAction::make()
+                        ->visible(fn() => auth()->user()->can('delete report month')),
+                ])
+                    ->visible(fn(Model $record) => in_array($record->status, ['menunggu']))
+                    ->label('Aksi')
+                    ->icon(Heroicon::PencilSquare),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->visible(fn() => auth()->user()->can('delete report month')),
+                ]),
+            ]);
+    }
+}

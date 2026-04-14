@@ -1,0 +1,99 @@
+<?php
+
+namespace App\Filament\Resources\Classrooms;
+
+use App\Filament\Resources\Classrooms\Pages\CreateClassroom;
+use App\Filament\Resources\Classrooms\Pages\EditClassroom;
+use App\Filament\Resources\Classrooms\Pages\ListClassrooms;
+use App\Filament\Resources\Classrooms\Pages\ViewClassroom;
+use App\Filament\Resources\Classrooms\Schemas\ClassroomForm;
+use App\Filament\Resources\Classrooms\Schemas\ClassroomInfolist;
+use App\Filament\Resources\Classrooms\Tables\ClassroomsTable;
+use App\Models\Classroom;
+use BackedEnum;
+use UnitEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+
+class ClassroomResource extends Resource
+{
+    protected static ?string $model = Classroom::class;
+
+    protected static ?string $pluralModelLabel = 'Ruangan Kelas';
+    protected static string|UnitEnum|null $navigationGroup = 'Master Data';
+    protected static ?int $navigationSort = 5;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function form(Schema $schema): Schema
+    {
+        return ClassroomForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ClassroomInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return ClassroomsTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListClassrooms::route('/'),
+            'create' => CreateClassroom::route('/create'),
+            'view' => ViewClassroom::route('/{record}'),
+            'edit' => EditClassroom::route('/{record}/edit'),
+        ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasAnyRole([
+            'superadmin',
+            'admin',
+        ]);
+    }
+
+    public static function canView($record): bool
+    {
+        return auth()->user()->hasAnyRole([
+            'superadmin',
+            'admin',
+        ]);
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->user()->can('manage santri');
+    }
+
+
+}

@@ -12,6 +12,7 @@ class SantriSick extends Model
             'santri_id',
             'date_sick',
             'date_recovered',
+            'confirmed_by',
             'diagnose',
             'description',
             'inputed_by',
@@ -20,6 +21,11 @@ class SantriSick extends Model
     public function santri(): BelongsTo
     {
         return $this->belongsTo(Santri::class, 'santri_id');
+    }
+
+    public function confirmed(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'confirmed_by');
     }
 
     public function userInput(): BelongsTo

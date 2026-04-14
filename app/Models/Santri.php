@@ -19,6 +19,8 @@ class Santri extends Model
             'address_city',
             'classroom_id',
             'status',
+            'file_path',
+            'description',
         ];
 
     public function classroom(): BelongsTo
@@ -41,5 +43,10 @@ class Santri extends Model
     public function violationDetails(): HasMany
     {
         return $this->hasMany(ViolationDetail::class, 'santri_id');
+    }
+
+    public function santris(): HasMany
+    {
+        return $this->hasMany(ReportMonthDetail::class, 'santri_id');
     }
 }

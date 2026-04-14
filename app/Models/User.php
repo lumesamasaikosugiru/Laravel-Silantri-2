@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'photo_path',
-        'is_actve',
+        'is_active',
     ];
 
     /**
@@ -51,17 +52,21 @@ class User extends Authenticatable
 
     public function santriSicks(): HasMany
     {
-        return $this->hasMany(SantriSick::class, 'user_id');
+        return $this->hasMany(SantriSick::class, 'inputed_by');
+    }
+    public function santriConfirms(): HasMany
+    {
+        return $this->hasMany(SantriSick::class, 'confirmed_by');
     }
 
     public function santriViolationDetails(): HasMany
     {
-        return $this->hasMany(ViolationDetail::class, 'user_id');
+        return $this->hasMany(ViolationDetail::class, 'inputed_by');
     }
 
     public function santriPermissionInputs(): HasMany
     {
-        return $this->hasMany(SantriPermission::class, 'user_id');
+        return $this->hasMany(SantriPermission::class, 'inputed_by');
     }
 
     public function santriPermissionApproveds(): HasMany

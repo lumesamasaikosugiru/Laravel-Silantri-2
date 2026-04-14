@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('report_months', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('month');
-            $table->unsignedTinyInteger('year');
+            $table->unsignedBigInteger('year');
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->enum('status', [
                 'menunggu',
