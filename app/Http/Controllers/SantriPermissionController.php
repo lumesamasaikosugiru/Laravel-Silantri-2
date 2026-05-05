@@ -12,7 +12,11 @@ class SantriPermissionController extends Controller
 {
     public function create()
     {
-        $santris = Santri::all();
+        $santris = Santri::select('id', 'name', 'nisn', 'classroom_id')
+            ->whereDoesntHave('santriReqPermissions', function ($query) {
+                $query->where('status', 'menunggu');
+            })
+            ->get();
 
         return view('izin.create', compact('santris'));
     }
@@ -78,11 +82,17 @@ class SantriPermissionController extends Controller
         $data = SantriPermission::where('ticket_permission', $request->ticket_permission)
             ->first();
 
+        if (!$data) {
+            return back()->with('error', 'Kode tracking tidak ditemukan');
+        }
+
         return redirect('/cek-izin')->with('data', $data);
     }
     public function showTracking($ticket)
     {
         $data = SantriPermission::where('ticket_permission', $ticket)->first();
+
+
 
         return view('izin.tracking', compact('data'));
     }

@@ -5,79 +5,101 @@
 @section('content')
 
     {{-- ===================== HERO SECTION ===================== --}}
-    <section
-        class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-950 via-teal-900 to-emerald-800">
+    <section class="relative min-h-screen flex flex-col overflow-hidden">
 
-        {{-- Decorative background circles --}}
-        <div class="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
-            <div class="absolute -top-32 -left-32 w-96 h-96 bg-emerald-500 opacity-10 rounded-full blur-3xl"></div>
-            <div class="absolute top-1/2 -right-40 w-[30rem] h-[30rem] bg-teal-400 opacity-10 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-emerald-300 opacity-10 rounded-full blur-3xl"></div>
+        {{-- Background foto pondok --}}
+        <div class="absolute inset-0">
+            <img src="{{ asset('images/pondok.jpeg') }}" alt="Foto Pondok Pesantren"
+                class="w-full h-full object-cover object-center" />
+            {{-- Overlay gelap emerald — opacity 0.72 supaya foto masih terlihat jelas tapi teks tetap terbaca --}}
+            <div class="absolute inset-0 bg-gradient-to-b from-emerald-950/80 via-emerald-950/72 to-emerald-950/90"></div>
+            {{-- Grain texture subtle --}}
+            <div class="absolute inset-0 opacity-[0.04]"
+                style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size: 200px 200px;">
+            </div>
         </div>
 
-        {{-- Subtle grid overlay --}}
-        <div class="absolute inset-0 opacity-5"
-            style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;">
+        {{-- Navbar tipis dengan logo --}}
+        <div class="relative z-20 w-full px-6 py-5">
+            <div class="container mx-auto flex items-center gap-3">
+                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo Pondok Pesantren"
+                    class="w-12 h-12 object-contain rounded-xl bg-white/10 p-1 backdrop-blur-sm border border-white/20" />
+                <div>
+                    <p class="text-white font-bold text-sm leading-tight">Pondok Pesantren Modern Al-Hasyimiyah</p>
+                    <p class="text-emerald-300 text-xs">Sistem Perizinan Santri</p>
+                </div>
+            </div>
         </div>
 
-        <div class="relative z-10 container mx-auto px-6 py-24 text-center">
+        {{-- Konten Hero --}}
+        <div class="relative z-10 flex-1 flex items-center justify-center container mx-auto px-6 py-16 text-center">
+            <div class="max-w-3xl mx-auto">
 
-            {{-- Badge --}}
-            <div
-                class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-emerald-200 text-sm font-medium px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Layanan Resmi Pondok Pesantren Modern Al-Hasyimiyah
+                {{-- Badge --}}
+                <div
+                    class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-emerald-200 text-sm font-medium px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Layanan Resmi Pondok Pesantren Modern Al-Hasyimiyah
+                </div>
+
+                {{-- Logo besar di tengah hero (opsional, memberi kesan institusi) --}}
+                <div class="flex justify-center mb-6">
+                    <div
+                        class="w-24 h-24 object-contain rounded-xl bg-white/15 backdrop-blur-md border border-white/25 p-2 shadow-2xl shadow-black/30 flex items-center justify-center">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo Pondok" class="w-full h-full object-contain" />
+                    </div>
+                </div>
+
+                {{-- Judul --}}
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight mb-6">
+                    Sistem
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
+                        Perizinan Santri
+                    </span>
+                </h1>
+
+                {{-- Subjudul --}}
+                <p class="max-w-xl mx-auto text-emerald-100/80 text-lg md:text-xl leading-relaxed mb-10">
+                    Ajukan izin keluar, pantau status, dan kelola keperluan santri Anda —
+                    <strong class="text-white font-semibold">tanpa perlu login</strong>, kapan saja dan di mana saja.
+                </p>
+
+                {{-- CTA Buttons --}}
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="/izin-santri"
+                        class="group inline-flex items-center gap-3 bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-bold text-base px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-400/50 hover:-translate-y-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Ajukan Izin
+                    </a>
+
+                    <a href="#tracking"
+                        class="group inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white font-semibold text-base px-8 py-4 rounded-2xl border border-white/20 transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+                        </svg>
+                        Cek Status Izin
+                    </a>
+                </div>
+
+                {{-- Scroll indicator --}}
+                <div class="mt-14 flex justify-center">
+                    <a href="#keunggulan"
+                        class="flex flex-col items-center text-white/40 hover:text-white/70 transition-colors duration-300 text-xs tracking-widest uppercase gap-2">
+                        <span>Scroll</span>
+                        <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                </div>
+
             </div>
-
-            {{-- Judul --}}
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight mb-6">
-                Sistem
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-200">
-                    Perizinan Santri
-                </span>
-            </h1>
-
-            {{-- Subjudul --}}
-            <p class="max-w-xl mx-auto text-emerald-100/80 text-lg md:text-xl leading-relaxed mb-10">
-                Ajukan izin keluar, pantau status, dan kelola keperluan santri Anda —
-                <strong class="text-white font-semibold">tanpa perlu login</strong>, kapan saja dan di mana saja.
-            </p>
-
-            {{-- CTA Buttons --}}
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/izin-santri"
-                    class="group inline-flex items-center gap-3 bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-bold text-base px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-500/30 hover:shadow-emerald-400/50 hover:-translate-y-0.5">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        class="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Ajukan Izin
-                </a>
-
-                <a href="#tracking"
-                    class="group inline-flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white font-semibold text-base px-8 py-4 rounded-2xl border border-white/20 transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
-                    </svg>
-                    Cek Status Izin
-                </a>
-            </div>
-
-            {{-- Scroll indicator --}}
-            <div class="mt-16 flex justify-center">
-                <a href="#keunggulan"
-                    class="flex flex-col items-center text-white/40 hover:text-white/70 transition-colors duration-300 text-xs tracking-widest uppercase gap-2">
-                    <span>Scroll</span>
-                    <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </a>
-            </div>
-
         </div>
     </section>
 
@@ -376,12 +398,9 @@
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
 
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-emerald-500/20 rounded-xl flex items-center justify-center">
-                        <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
+                    <div
+                        class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center overflow-hidden border border-white/10">
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" class="w-full h-full object-contain p-0.5" />
                     </div>
                     <div>
                         <p class="text-white font-semibold text-sm leading-tight">Pondok Pesantren Modern Al-Hasyimiyah</p>
