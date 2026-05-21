@@ -163,22 +163,29 @@
             const classText = document.getElementById('classText');
 
             new TomSelect('#santriSelect', {
-                placeholder: 'Cari nama santri...',
-                allowEmptyOption: true,
-                maxOptions: 200,
-                onChange(value) {
-                    if (!value) {
-                        infoBox.style.maxHeight = '0';
-                        infoBox.style.opacity = '0';
-                        return;
-                    }
-                    const opt = document.querySelector(`#santriSelect option[value="${value}"]`);
-                    nisnText.textContent = opt?.dataset.nisn || '—';
-                    classText.textContent = opt?.dataset.class || '—';
-                    infoBox.style.maxHeight = infoBox.scrollHeight + 'px';
-                    infoBox.style.opacity = '1';
-                }
-            });
+    placeholder: 'Cari nama santri...',
+    allowEmptyOption: false, // ← ubah jadi false
+    maxOptions: 200,
+    render: {
+        option: function(data, escape) {
+            // Sembunyikan opsi kosong dari dropdown list
+            if (!data.value) return '<div style="display:none"></div>';
+            return '<div class="option">' + escape(data.text) + '</div>';
+        }
+    },
+    onChange(value) {
+        if (!value) {
+            infoBox.style.maxHeight = '0';
+            infoBox.style.opacity   = '0';
+            return;
+        }
+        const opt = document.querySelector(`#santriSelect option[value="${value}"]`);
+        nisnText.textContent  = opt?.dataset.nisn  || '—';
+        classText.textContent = opt?.dataset.class || '—';
+        infoBox.style.maxHeight = infoBox.scrollHeight + 'px';
+        infoBox.style.opacity   = '1';
+    }
+});
         })();
     </script>
 @endpush
