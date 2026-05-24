@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SantriPermissionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReportMonthPdfController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,3 +17,7 @@ Route::post('/cek-izin', [SantriPermissionController::class, 'trackingResult']);
 Route::get('/cek-izin', [SantriPermissionController::class, 'trackingForm']);
 Route::get('/cek-izin/{ticket}', [SantriPermissionController::class, 'showTracking'])
     ->name('tracking.result');
+
+Route::get('/admin/report-months/{report}/pdf', [ReportMonthPdfController::class, 'download'])
+    ->name('report-months.pdf')
+    ->middleware(['auth']);
