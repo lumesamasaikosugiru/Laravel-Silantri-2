@@ -64,9 +64,16 @@ class SantriPermissionsTable
         return $table
             ->columns([
                 TextColumn::make('ticket_permission')
+                    ->label('Kode Perizinan')
                     ->sortable()
                     ->searchable()
-                    ->label('Kode Perizinan'),
+                    ->copyable()
+                    ->copyMessage('Kode perizinan telah disalin!')
+                    ->copyMessageDuration(1500)
+                    ->fontFamily('mono')
+                    ->icon(Heroicon::ClipboardDocument)
+                    ->iconColor(Color::Green)
+                    ->tooltip('Salin kode perizinan'),
                 TextColumn::make('santriReqPermission.name')
                     ->label('Nama')
                     ->sortable(),

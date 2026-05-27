@@ -215,7 +215,7 @@
                                     </svg>
                                 </div>
                                 <input type="text" id="ticket_permission" name="ticket_permission"
-                                    placeholder="Contoh: PST-2024-0001" required
+                                    placeholder="Contoh: IZIN-2026-XXXXXX" required
                                     class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent focus:bg-white transition-all duration-200 text-sm" />
 
                                 @if (session('error'))

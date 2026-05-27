@@ -58,8 +58,15 @@ class SendPermissionWhatsappNotification
         $santriName = $permission->santriReqPermission->name ?? 'Santri';
         $ticket = $permission->ticket_permission;
         $type = strtoupper($permission->type);
-        $dateStarted = Carbon::parse($permission->date_started)->isoFormat('D MMMM Y, HH:mm');
-        $dateEnded = Carbon::parse($permission->date_ended)->isoFormat('D MMMM Y, HH:mm');
+
+        $dateStarted = Carbon::parse($permission->date_started)
+            ->setTimezone('Asia/Jakarta')
+            ->isoFormat('D MMMM Y, HH:mm');
+
+        $dateEnded = Carbon::parse($permission->date_ended)
+            ->setTimezone('Asia/Jakarta')
+            ->isoFormat('D MMMM Y, HH:mm');
+
         $pondok = config('app.pesantren.nama');
 
         return match ($triggerBy) {

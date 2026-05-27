@@ -8,15 +8,15 @@
         <div class="w-full max-w-2xl mx-auto">
 
             {{-- Tombol Kembali --}}
-<div class="mb-6">
-    <a href="/"
-        class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-emerald-600 transition-colors duration-200">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-        </svg>
-        Kembali ke Beranda
-    </a>
-</div>
+            <div class="mb-6">
+                <a href="/"
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-emerald-600 transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                    Kembali ke Beranda
+                </a>
+            </div>
 
             {{-- Header --}}
             <div class="text-center mb-8">
@@ -33,13 +33,13 @@
             </div>
 
             {{-- Alert success --}}
-            @if(session('success'))
+            @if (session('success'))
                 <div class="bg-emerald-100 text-emerald-700 p-4 rounded-2xl mb-6 text-sm">
                     {{ session('success') }}
                 </div>
             @endif
 
-            @if(session('ticket'))
+            @if (session('ticket'))
                 <div class="bg-emerald-100 text-emerald-800 p-5 rounded-2xl mb-6 text-sm">
                     <p class="font-semibold mb-1">Pengajuan berhasil!</p>
                     <p>Kode Tracking Anda:</p>
@@ -59,7 +59,7 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Santri</label>
                         <select name="santri_id" id="santriSelect" placeholder="Cari nama santri...">
                             <option value="">-- pilih santri --</option>
-                            @foreach($santris as $santri)
+                            @foreach ($santris as $santri)
                                 <option value="{{ $santri->id }}" data-nisn="{{ $santri->nisn }}"
                                     data-class="{{ $santri->classroom->name ?? 'Kelas ' . $santri->classroom_id }}">
                                     {{ $santri->name }}
@@ -111,12 +111,16 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Mulai</label>
-                            <input type="date" name="date_started"
+                            <input type="datetime-local" name="date_started" id="date_started"
+                                min="{{ now()->timezone('Asia/Jakarta')->format('Y-m-d\TH:i') }}"
+                                max="{{ now()->timezone('Asia/Jakarta')->format('Y-12-31\T23:59') }}"
                                 class="w-full border border-gray-200 rounded-2xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-emerald-500 text-sm">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Selesai</label>
-                            <input type="date" name="date_ended"
+                            <input type="datetime-local" name="date_ended" id="date_ended"
+                                min="{{ now()->timezone('Asia/Jakarta')->format('Y-m-d\TH:i') }}"
+                                max="{{ now()->timezone('Asia/Jakarta')->format('Y-12-31\T23:59') }}"
                                 class="w-full border border-gray-200 rounded-2xl px-4 py-3 bg-gray-50 focus:ring-2 focus:ring-emerald-500 text-sm">
                         </div>
                     </div>
@@ -168,35 +172,50 @@
 
 @push('scripts')
     <script>
-        (function () {
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ── TomSelect ──────────────────────────────────────────
             const infoBox = document.getElementById('santriInfo');
             const nisnText = document.getElementById('nisnText');
             const classText = document.getElementById('classText');
 
             new TomSelect('#santriSelect', {
-    placeholder: 'Cari nama santri...',
-    allowEmptyOption: false, // ← ubah jadi false
-    maxOptions: 200,
-    render: {
-        option: function(data, escape) {
-            // Sembunyikan opsi kosong dari dropdown list
-            if (!data.value) return '<div style="display:none"></div>';
-            return '<div class="option">' + escape(data.text) + '</div>';
-        }
-    },
-    onChange(value) {
-        if (!value) {
-            infoBox.style.maxHeight = '0';
-            infoBox.style.opacity   = '0';
-            return;
-        }
-        const opt = document.querySelector(`#santriSelect option[value="${value}"]`);
-        nisnText.textContent  = opt?.dataset.nisn  || '—';
-        classText.textContent = opt?.dataset.class || '—';
-        infoBox.style.maxHeight = infoBox.scrollHeight + 'px';
-        infoBox.style.opacity   = '1';
-    }
-});
-        })();
+                placeholder: 'Cari nama santri...',
+                allowEmptyOption: false,
+                maxOptions: 200,
+                render: {
+                    option: function(data, escape) {
+                        if (!data.value) return '<div style="display:none"></div>';
+                        return '<div class="option">' + escape(data.text) + '</div>';
+                    }
+                },
+                onChange(value) {
+                    if (!value) {
+                        infoBox.style.maxHeight = '0';
+                        infoBox.style.opacity = '0';
+                        return;
+                    }
+                    const opt = document.querySelector(`#santriSelect option[value="${value}"]`);
+                    nisnText.textContent = opt?.dataset.nisn || '—';
+                    classText.textContent = opt?.dataset.class || '—';
+                    infoBox.style.maxHeight = infoBox.scrollHeight + 'px';
+                    infoBox.style.opacity = '1';
+                }
+            });
+
+            // ── Date validation ────────────────────────────────────
+            const dateStarted = document.getElementById('date_started');
+            const dateEnded = document.getElementById('date_ended');
+
+            if (dateStarted && dateEnded) {
+                dateStarted.addEventListener('change', function() {
+                    dateEnded.min = this.value;
+                    if (dateEnded.value && dateEnded.value < this.value) {
+                        dateEnded.value = this.value;
+                    }
+                });
+            }
+
+        });
     </script>
 @endpush

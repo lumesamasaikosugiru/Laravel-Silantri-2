@@ -26,13 +26,13 @@ class SantriPermissionController extends Controller
     {
         $request->validate([
             'santri_id' => 'required|exists:santris,id',
-            'type' => 'required',
-            'date_started' => 'required|date',
-            'date_ended' => 'required|date|after_or_equal:date_started',
-            'reason' => 'required',
-            'wali_name' => 'required',
-            'wali_phone' => 'required',
-            'wali_relation' => 'required',
+            'type' => 'required|in:pulang,keluar,lainnya',
+            'date_started' => 'required|date|after_or_equal:today|date_format:Y-m-d\TH:i',
+            'date_ended' => 'required|date|after_or_equal:date_started|date_format:Y-m-d\TH:i',
+            'reason' => 'required|string|max:50',
+            'wali_name' => 'required|string|max:30',
+            'wali_phone' => 'required|string|max:15',
+            'wali_relation' => 'required|in:orangtua,saudara_kandung,saudara_keluarga',
         ]);
         // ✅ Guard double submit: cek apakah santri ini baru saja submit (dalam 10 detik)
         $recentExists = SantriPermission::where('santri_id', $request->santri_id)
@@ -73,6 +73,9 @@ class SantriPermissionController extends Controller
 
         // Load relasi sebelum dispatch
         $permission->loadMissing(['santriReqPermission']);
+
+        // ✅ Refresh dari DB + load relasi yang dibutuhkan listener
+        $permission = $permission->fresh(['santriReqPermission']);
 
         event(new SantriPermissionStatusChanged($permission, 'created'));
 

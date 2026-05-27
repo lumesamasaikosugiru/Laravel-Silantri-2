@@ -26,7 +26,13 @@ class SantriPermissionForm
                 Section::make('Lengkapi Ijin')
                     ->schema([
                         Select::make('santri_id')
-                            ->relationship('santriReqPermission', 'name')
+                            ->relationship(
+                                'santriReqPermission',
+                                'name',
+                                fn($query) => $query->whereDoesntHave('santriReqPermissions', function ($q) {
+                                    $q->where('status', 'menunggu');
+                                })
+                            )
                             ->preload()
                             ->searchable()
                             ->placeholder('Cari santri')

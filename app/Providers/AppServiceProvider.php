@@ -3,9 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Events\SantriPermissionStatusChanged;
-use App\Listeners\SendPermissionWhatsappNotification;
-use Illuminate\Support\Facades\Event;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,9 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Event::listen(
-        //     SantriPermissionStatusChanged::class,
-        //     SendPermissionWhatsappNotification::class,
-        // );
+
+        Carbon::setLocale('id');
+        date_default_timezone_set('Asia/Jakarta'); // ✅ set timezone global
     }
 }

@@ -25,6 +25,14 @@ class SantriPermission extends Model
             'date_approved',
         ];
 
+
+    protected $casts = [
+        'date_started' => 'datetime',
+        'date_ended' => 'datetime',
+        'date_approved' => 'datetime',
+    ];
+
+
     public function santriReqPermission(): BelongsTo
     {
         return $this->belongsTo(Santri::class, 'santri_id');

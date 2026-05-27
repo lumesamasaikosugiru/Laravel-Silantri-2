@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -129,7 +129,7 @@ return [
 |--------------------------------------------------------------------------
 */
     'pesantren' => [
-        'nama' => 'Pondok Pesantren Nama Anda',
+        'nama' => 'Pondok Pesantren Modern Al-Hasyimiyah',
         'alamat' => 'Jl. Contoh No. 1, Kota, Provinsi',
         'telp' => '(021) 000-0000',
         'email' => 'info@pesantren.sch.id',
