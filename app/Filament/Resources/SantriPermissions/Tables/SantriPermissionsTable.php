@@ -15,6 +15,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\SantriPermissionStatusChanged;
 
 class SantriPermissionsTable
 {
@@ -27,8 +28,14 @@ class SantriPermissionsTable
             'date_approved' => now()->toDateString(),
         ]);
 
+        // Load relasi yang dibutuhkan listener
+        $record->loadMissing(['santriReqPermission', 'santriPermissionApproved']);
+
+        event(new SantriPermissionStatusChanged($record, 'approved'));
+
         Notification::make()
             ->title('Perizinan telah disetujui')
+            ->body('Notifikasi WA sedang dikirim ke wali santri.')
             ->success()
             ->send();
     }
@@ -41,8 +48,13 @@ class SantriPermissionsTable
             'date_approved' => now()->toDateString(),
         ]);
 
+        $record->loadMissing(['santriReqPermission', 'santriPermissionApproved']);
+
+        event(new SantriPermissionStatusChanged($record, 'rejected'));
+
         Notification::make()
             ->title('Perizinan ditolak')
+            ->body('Notifikasi WA sedang dikirim ke wali santri.')
             ->danger()
             ->send();
     }

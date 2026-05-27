@@ -133,7 +133,7 @@ return [
         'alamat' => 'Jl. Contoh No. 1, Kota, Provinsi',
         'telp' => '(021) 000-0000',
         'email' => 'info@pesantren.sch.id',
-        'logo' => null, // isi path logo: public_path('images/logo.png')
+        'logo' => public_path('images/logo.jpeg'),
         'kepala' => 'Bagus Pribadi, S.Kom.,M.Ag.',
         'nip' => '19800101 200501 1 001',
     ],
