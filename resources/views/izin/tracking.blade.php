@@ -17,13 +17,6 @@
                         </svg>
                         Beranda
                     </a>
-                    <a href="/izin-santri"
-                        class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-4 py-2 rounded-full transition-all duration-200">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        Buat Tiket Baru
-                    </a>
                 </div>
 
                 {{-- Header --}}
@@ -200,10 +193,19 @@
                             class="flex-1 text-center bg-white border border-gray-200 hover:border-gray-300 text-gray-600 font-semibold py-3.5 rounded-2xl transition-all duration-200 text-sm">
                             🏠 Beranda
                         </a>
-                        <a href="/izin-santri"
-                            class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 shadow-md shadow-emerald-200 text-sm">
-                            + Buat Tiket Baru
-                        </a>
+
+                        @if ($data->status === 'menunggu')
+                            {{-- Nonaktif: izin sedang menunggu --}}
+                            <div class="flex-1 text-center bg-gray-100 border border-gray-200 text-gray-400 font-semibold py-3.5 rounded-2xl text-sm cursor-not-allowed"
+                                title="Masih ada izin yang menunggu persetujuan">
+                                ⏳ Menunggu Persetujuan
+                            </div>
+                        @else
+                            <a href="/izin-santri"
+                                class="flex-1 text-center bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 shadow-md shadow-emerald-200 text-sm">
+                                + Buat Tiket Baru
+                            </a>
+                        @endif
                     </div>
 
                 @endif
