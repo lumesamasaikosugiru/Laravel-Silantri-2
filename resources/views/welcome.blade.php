@@ -208,8 +208,8 @@
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                        stroke-width="2">
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
                                     </svg>
@@ -217,6 +217,18 @@
                                 <input type="text" id="ticket_permission" name="ticket_permission"
                                     placeholder="Contoh: PST-2024-0001" required
                                     class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent focus:bg-white transition-all duration-200 text-sm" />
+
+                                @if (session('error'))
+                                    <p class="text-red-500 text-xs mt-2 flex items-center gap-1">
+                                        <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor" stroke-width="2.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M12 9v3.75m9.303 3.376c.866 1.5-.217 3.374-1.948 3.374H2.645c-1.73 0-2.813-1.874-1.948-3.374L10.05 3.378c.866-1.5 3.032-1.5 3.898 0L21.303 16.126z" />
+                                        </svg>
+                                        {{ session('error') }}
+                                    </p>
+                                @endif
+
                             </div>
                             <p class="text-xs text-gray-400 mt-2 pl-1">
                                 Kode tracking dikirim via WhatsApp/SMS saat izin diajukan.
@@ -225,7 +237,8 @@
 
                         <button type="submit"
                             class="w-full bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold py-4 rounded-2xl transition-all duration-200 shadow-md shadow-emerald-200 hover:shadow-lg hover:shadow-emerald-300 hover:-translate-y-0.5 flex items-center justify-center gap-2 text-base">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                             </svg>
@@ -245,7 +258,8 @@
 
                     <a href="/izin-santri"
                         class="w-full flex items-center justify-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-100 py-3.5 rounded-2xl transition-all duration-200">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
                         Ajukan Izin Baru
@@ -357,7 +371,8 @@
                 {{-- Foto 6 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=800&q=80" alt="Lingkungan Pondok"
+                    <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=800&q=80"
+                        alt="Lingkungan Pondok"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
@@ -400,7 +415,8 @@
                 <div class="flex items-center gap-3">
                     <div
                         class="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center overflow-hidden border border-white/10">
-                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" class="w-full h-full object-contain p-0.5" />
+                        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo"
+                            class="w-full h-full object-contain p-0.5" />
                     </div>
                     <div>
                         <p class="text-white font-semibold text-sm leading-tight">Pondok Pesantren Modern Al-Hasyimiyah</p>
@@ -429,11 +445,14 @@
     {{-- Smooth scroll script --}}
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });

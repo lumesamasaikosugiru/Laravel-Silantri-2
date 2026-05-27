@@ -99,7 +99,9 @@ class SantriPermissionController extends Controller
             ->first();
 
         if (!$data) {
-            return back()->with('error', 'Kode tracking tidak ditemukan');
+            return back()
+                ->withInput()
+                ->with('error', 'Kode tracking tidak ditemukan');
         }
 
         return redirect('/cek-izin')->with('data', $data);
