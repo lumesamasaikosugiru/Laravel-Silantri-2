@@ -130,11 +130,11 @@ return [
 */
     'pesantren' => [
         'nama' => 'Pondok Pesantren Modern Al-Hasyimiyah',
-        'alamat' => 'Jl. Contoh No. 1, Kota, Provinsi',
-        'telp' => '(021) 000-0000',
+        'alamat' => 'Jl. Sunan Gunung Jati No.12 Tegalratu, Kec. Ciwandan, Kota Cilegon, Banten',
+        'telp' => '(+62)878-7358-8138',
         'email' => 'info@pesantren.sch.id',
         'logo' => public_path('images/logo.jpeg'),
-        'kepala' => 'Bagus Pribadi, S.Kom.,M.Ag.',
+        'kepala' => 'Muhammad Warits, S.Kom.',
         'nip' => '19800101 200501 1 001',
     ],
 

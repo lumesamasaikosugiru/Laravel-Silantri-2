@@ -293,15 +293,14 @@
                 {{-- Foto 1 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80"
-                        alt="Masjid Pondok Pesantren"
+                    <img src="{{ asset('images/gallery-01.jpeg') }}" alt="Masjid Pondok Pesantren"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                         <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="font-bold text-base">Masjid Pondok</p>
-                            <p class="text-sm text-emerald-200">Pusat kegiatan ibadah santri</p>
+                            <p class="font-bold text-base">Penampilan kreasi santri 2025</p>
+                            <p class="text-sm text-emerald-200">Kegiatan santri yang aktif</p>
                         </div>
                     </div>
                 </div>
@@ -309,15 +308,14 @@
                 {{-- Foto 2 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80"
-                        alt="Kegiatan Belajar Santri"
+                    <img src="{{ asset('images/gallery-02.jpeg') }}" alt="Kegiatan Belajar Santri"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                         <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="font-bold text-base">Kegiatan Belajar</p>
-                            <p class="text-sm text-emerald-200">Proses belajar yang terstruktur</p>
+                            <p class="font-bold text-base">Backround panggung gembira 2025</p>
+                            <p class="text-sm text-emerald-200">Kegiatan santri yang aktif</p>
                         </div>
                     </div>
                 </div>
@@ -325,14 +323,14 @@
                 {{-- Foto 3 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=800&q=80" alt="Asrama Santri"
+                    <img src="{{ asset('images/gallery-04.jpeg') }}" alt="Asrama Santri"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                         <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="font-bold text-base">Asrama Santri</p>
-                            <p class="text-sm text-emerald-200">Hunian yang bersih dan nyaman</p>
+                            <p class="font-bold text-base">Laporan Pertanggung Jawaban OPPM Putri 2025</p>
+                            <p class="text-sm text-emerald-200">Kegiatan Organisasi</p>
                         </div>
                     </div>
                 </div>
@@ -340,15 +338,14 @@
                 {{-- Foto 4 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer sm:col-span-2 md:col-span-1">
-                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
-                        alt="Kegiatan Olahraga"
+                    <img src="{{ asset('images/gallery-05.jpeg') }}" alt="Kegiatan Olahraga"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                         <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="font-bold text-base">Kegiatan Olahraga</p>
-                            <p class="text-sm text-emerald-200">Santri sehat jasmani dan rohani</p>
+                            <p class="font-bold text-base">Kegiatan Belajar mengajar </p>
+                            <p class="text-sm text-emerald-200">Aktivitas siang hari dilingkungan pondoks</p>
                         </div>
                     </div>
                 </div>
@@ -356,14 +353,14 @@
                 {{-- Foto 5 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80" alt="Perpustakaan"
+                    <img src="{{ asset('images/gallery-06.jpeg') }}" alt="Perpustakaan"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                         <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="font-bold text-base">Perpustakaan</p>
-                            <p class="text-sm text-emerald-200">Ribuan koleksi kitab & buku</p>
+                            <p class="font-bold text-base">Amaliyah tadris 2025</p>
+                            <p class="text-sm text-emerald-200">Kegiatan praktek mengajar</p>
                         </div>
                     </div>
                 </div>
@@ -371,15 +368,14 @@
                 {{-- Foto 6 --}}
                 <div
                     class="group relative overflow-hidden rounded-3xl aspect-[4/3] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=800&q=80"
-                        alt="Lingkungan Pondok"
+                    <img src="{{ asset('images/gallery-07.jpeg') }}" alt="Lingkungan Pondok"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy" />
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                         <div class="text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="font-bold text-base">Lingkungan Pondok</p>
-                            <p class="text-sm text-emerald-200">Asri, hijau, dan kondusif</p>
+                            <p class="font-bold text-base">Halal bihalal bersama dewan guru</p>
+                            <p class="text-sm text-emerald-200">Silaturahmi pasca-Lebaran</p>
                         </div>
                     </div>
                 </div>
