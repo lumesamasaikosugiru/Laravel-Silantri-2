@@ -72,14 +72,20 @@ class SantrisTable
                 //
             ])
             ->recordActions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make()
-                        ->visible(fn() => auth()->user()->can('manage santri')),
-                    DeleteAction::make()
-                        ->visible(fn() => auth()->user()->can('manage santri')),
-                ])->label('Aksi')
-                    ->icon(Heroicon::PencilSquare),
+                ...(auth()->user()->can('manage santri')
+                    ? [
+                        ActionGroup::make([
+                            ViewAction::make(),
+                            EditAction::make(),
+                            DeleteAction::make(),
+                        ])
+                            ->label('Aksi')
+                            ->icon(Heroicon::PencilSquare),
+                    ]
+                    : [
+                        ViewAction::make(),
+                    ]
+                ),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
