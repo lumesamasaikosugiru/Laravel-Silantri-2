@@ -26,10 +26,11 @@ class WaliSantriForm
                         TextInput::make('phone')
                             ->label('Nomor HP (untuk login dashboard)')
                             ->required()
-                            ->maxLength(15)
+                            ->maxLength(20)
                             ->unique(ignoreRecord: true)
                             ->prefixIcon(Heroicon::OutlinedPhone)
-                            ->helperText('Nomor ini akan digunakan wali untuk login dashboard via OTP WhatsApp'),
+                            ->helperText('Nomor ini akan digunakan wali untuk login dashboard via OTP WhatsApp')
+                            ->dehydrateStateUsing(fn(?string $state) => $state ? preg_replace('/[^0-9]/', '', $state) : null),
                     ])
                     ->columns(2)
                     ->columnSpanFull(),

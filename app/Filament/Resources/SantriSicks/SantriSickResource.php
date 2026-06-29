@@ -24,7 +24,7 @@ class SantriSickResource extends Resource
     protected static ?string $pluralModelLabel = 'Data Santri Sakit';
     protected static string|UnitEnum|null $navigationGroup = "Santri's Activities";
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocument;
     protected static ?string $recordTitleAttribute = 'date_sick';
 

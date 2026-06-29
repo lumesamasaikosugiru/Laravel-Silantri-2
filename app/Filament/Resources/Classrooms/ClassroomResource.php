@@ -24,7 +24,7 @@ class ClassroomResource extends Resource
     protected static ?string $pluralModelLabel = 'Ruangan Kelas';
     protected static string|UnitEnum|null $navigationGroup = 'Master Data';
     protected static ?int $navigationSort = 5;
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowRightEndOnRectangle;
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema

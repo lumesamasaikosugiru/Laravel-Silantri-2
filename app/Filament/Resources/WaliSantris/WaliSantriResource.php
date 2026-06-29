@@ -11,6 +11,7 @@ use App\Filament\Resources\WaliSantris\Schemas\WaliSantriInfolist;
 use App\Filament\Resources\WaliSantris\Tables\WaliSantrisTable;
 use App\Models\WaliSantri;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -20,7 +21,11 @@ class WaliSantriResource extends Resource
 {
     protected static ?string $model = WaliSantri::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $pluralModelLabel = 'Wali Santri';
+    protected static string|UnitEnum|null $navigationGroup = "Santri's Activities";
+    protected static ?int $navigationSort = 2;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?string $recordTitleAttribute = 'name';
 

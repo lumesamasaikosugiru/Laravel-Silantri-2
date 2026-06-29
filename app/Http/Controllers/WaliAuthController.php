@@ -27,15 +27,15 @@ class WaliAuthController extends Controller
     public function sendOtp(Request $request)
     {
         $request->validate([
-            'phone' => 'required|string|min:9|max:15',
+            'phone' => 'required|string|min:9|max:20',
         ]);
 
-        $phone = $this->normalizePhone($request->phone);
+        $inputPhoneNormalized = $this->normalizePhone($request->phone);
 
-        // ── Cek apakah nomor terdaftar sebagai wali ──────────────
-        $wali = WaliSantri::where('phone', $request->phone)
-            ->orWhere('phone', $phone)
-            ->first();
+        // ✅ Cari wali dengan membandingkan versi normalized keduanya
+        $wali = WaliSantri::get()->first(function ($w) use ($inputPhoneNormalized) {
+            return $this->normalizePhone($w->phone) === $inputPhoneNormalized;
+        });
 
         if (!$wali) {
             return back()
@@ -52,7 +52,6 @@ class WaliAuthController extends Controller
                 ->with('error', $result['message']);
         }
 
-        // ── Simpan nomor di session sementara untuk step verifikasi ──
         session(['otp_pending_phone' => $wali->phone]);
 
         return redirect()->route('wali.verify.form')

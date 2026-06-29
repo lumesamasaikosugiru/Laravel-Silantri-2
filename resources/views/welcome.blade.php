@@ -21,13 +21,26 @@
 
         {{-- Navbar tipis dengan logo --}}
         <div class="relative z-20 w-full px-6 py-5">
-            <div class="container mx-auto flex items-center gap-3">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo Pondok Pesantren"
-                    class="w-12 h-12 object-contain rounded-xl bg-white/10 p-1 backdrop-blur-sm border border-white/20" />
-                <div>
-                    <p class="text-white font-bold text-sm leading-tight">Pondok Pesantren Modern Al-Hasyimiyah</p>
-                    <p class="text-emerald-300 text-xs">Sistem Perizinan Santri</p>
+            <div class="container mx-auto flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <img src="{{ asset('images/logo.jpeg') }}" alt="Logo Pondok Pesantren"
+                        class="w-12 h-12 object-contain rounded-xl bg-white/10 p-1 backdrop-blur-sm border border-white/20" />
+                    <div>
+                        <p class="text-white font-bold text-sm leading-tight">Pondok Pesantren Modern Al-Hasyimiyah</p>
+                        <p class="text-emerald-300 text-xs">Sistem Perizinan Santri</p>
+                    </div>
                 </div>
+
+                <a href="{{ route('wali.login.form') }}"
+                    class="inline-flex items-center gap-2 bg-orange-400/90 hover:bg-orange-300 text-emerald-950 font-semibold text-sm px-4 sm:px-5 py-2.5 rounded-xl border border-orange-300/40 transition-all duration-300 backdrop-blur-sm shadow-md shadow-orange-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                    <span class="hidden sm:inline">Login Wali Santri</span>
+                    <span class="sm:hidden">Login</span>
+                </a>
             </div>
         </div>
 
@@ -61,7 +74,7 @@
                 {{-- Subjudul --}}
                 <p class="max-w-xl mx-auto text-emerald-100/80 text-lg md:text-xl leading-relaxed mb-10">
                     Ajukan izin keluar, pantau status, dan kelola keperluan santri Anda —
-                    <strong class="text-white font-semibold">tanpa perlu login</strong>, kapan saja dan di mana saja.
+                    <strong class="text-white font-semibold">cepat dan mudah</strong>, kapan saja dan di mana saja.
                 </p>
 
                 {{-- CTA Buttons --}}
@@ -85,6 +98,7 @@
                         </svg>
                         Cek Status Izin
                     </a>
+
                 </div>
 
                 {{-- Scroll indicator --}}
@@ -150,9 +164,10 @@
                                 d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Tanpa Login</h3>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Akses Tanpa Ribet</h3>
                     <p class="text-gray-500 text-sm leading-relaxed">
-                        Tidak perlu daftar akun. Akses langsung dengan kode tracking yang diberikan.
+                        Lacak izin langsung pakai kode tiket, atau masuk ke dashboard riwayat anak cukup dengan nomor
+                        WhatsApp.
                     </p>
                 </div>
 
@@ -399,6 +414,16 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
                 Ajukan Izin Sekarang
+            </a>
+
+            <a href="{{ route('wali.login.form') }}"
+                class="group inline-flex items-center gap-3 bg-orange-400/90 hover:bg-orange-300 text-emerald-950 font-semibold text-base px-8 py-4 rounded-2xl border border-orange-300/40 transition-all duration-300 backdrop-blur-sm hover:-translate-y-0.5 shadow-lg shadow-orange-500/20 hover:shadow-orange-400/40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+                Login Wali Santri
             </a>
         </div>
     </section>

@@ -24,7 +24,7 @@ class ViolationDetailResource extends Resource
     protected static ?string $pluralModelLabel = 'Data Pelanggaran';
     protected static string|UnitEnum|null $navigationGroup = "Santri's Activities";
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
 
 
