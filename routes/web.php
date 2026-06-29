@@ -10,20 +10,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//route buat akses publick oleh wali santri
+// ── Perizinan Santri — akses publik oleh wali santri ──────────
 Route::get('/izin-santri', [SantriPermissionController::class, 'create']);
 Route::post('/izin-santri', [SantriPermissionController::class, 'store']);
 
-//untuk tracking perizinan olehh wali santri
+// ── Tracking Perizinan oleh Wali Santri ────────────────────────
 Route::post('/cek-izin', [SantriPermissionController::class, 'trackingResult']);
 Route::get('/cek-izin', [SantriPermissionController::class, 'trackingForm']);
 Route::get('/cek-izin/{ticket}', [SantriPermissionController::class, 'showTracking'])
     ->name('tracking.result');
 
-Route::get('/admin/report-months/{report}/pdf', [ReportMonthPdfController::class, 'download'])
+// ── Export PDF Laporan Bulanan (di luar prefix /admin agar tidak konflik dengan Filament panel) ──
+Route::get('/report-months/{report}/pdf', [ReportMonthPdfController::class, 'download'])
     ->name('report-months.pdf')
     ->middleware(['auth']);
-// ── Wali Santri Dashboard Routes ──────────────────────────────
+
+// ── Wali Santri Dashboard Routes ───────────────────────────────
 Route::prefix('wali')->name('wali.')->group(function () {
 
     // Auth (tanpa middleware)
@@ -36,7 +38,7 @@ Route::prefix('wali')->name('wali.')->group(function () {
 
     Route::post('/logout', [WaliAuthController::class, 'logout'])->name('logout');
 
-    // Dashboard (dengan middleware wali.auth) — akan diisi di Tahap 6
+    // Dashboard (dengan middleware wali.auth)
     Route::middleware('wali.auth')->group(function () {
         Route::get('/dashboard', [WaliDashboardController::class, 'index'])->name('dashboard');
         Route::get('/dashboard/santri/{santriId}', [WaliDashboardController::class, 'showSantri'])->name('dashboard.santri');
