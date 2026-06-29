@@ -39,8 +39,12 @@
             <div
                 class="bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-6 mb-5 sm:mb-6 flex items-center gap-3 sm:gap-4">
                 <div
-                    class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-lg sm:text-2xl shrink-0 shadow-sm">
-                    {{ substr($santri->name, 0, 1) }}
+                    class="w-12 h-12 sm:w-16 sm:h-16 rounded-full overflow-hidden shrink-0 shadow-sm bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white font-bold text-lg sm:text-2xl">
+                    @if ($santri->photo_url)
+                        <img src="{{ $santri->photo_url }}" alt="{{ $santri->name }}" class="w-full h-full object-cover">
+                    @else
+                        {{ substr($santri->name, 0, 1) }}
+                    @endif
                 </div>
                 <div class="min-w-0">
                     <h2 class="text-base sm:text-xl font-bold text-gray-900 truncate">{{ $santri->name }}</h2>

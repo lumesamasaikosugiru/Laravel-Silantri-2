@@ -33,8 +33,13 @@
                         class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all p-4 sm:p-5 flex items-center justify-between group">
                         <div class="flex items-center gap-3 sm:gap-4 min-w-0">
                             <div
-                                class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-base sm:text-lg shrink-0">
-                                {{ substr($santri->name, 0, 1) }}
+                                class="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-base sm:text-lg">
+                                @if ($santri->photo_url)
+                                    <img src="{{ $santri->photo_url }}" alt="{{ $santri->name }}"
+                                        class="w-full h-full object-cover">
+                                @else
+                                    {{ substr($santri->name, 0, 1) }}
+                                @endif
                             </div>
                             <div class="min-w-0">
                                 <p class="font-bold text-gray-900 text-sm sm:text-base truncate">{{ $santri->name }}</p>

@@ -21,6 +21,7 @@ class SantrisTable
             ->columns([
                 ImageColumn::make('file_path')
                     ->imageSize(60)
+                    ->disk('public')
                     ->label('Foto'),
                 TextColumn::make('nisn')
                     ->label('NISN')

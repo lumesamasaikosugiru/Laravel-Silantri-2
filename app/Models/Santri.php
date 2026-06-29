@@ -58,4 +58,11 @@ class Santri extends Model
             ->withPivot('relation')
             ->withTimestamps();
     }
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        return $this->file_path
+            ? asset('storage/' . $this->file_path)
+            : null;
+    }
 }
