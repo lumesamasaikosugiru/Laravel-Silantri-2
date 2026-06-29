@@ -23,7 +23,7 @@ class SantriPermissionResource extends Resource
     protected static ?string $pluralModelLabel = 'Data Perizinan Santri';
     protected static string|UnitEnum|null $navigationGroup = "Santri's Activities";
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboard;
     protected static ?string $recordTitleAttribute = 'santri_id';
