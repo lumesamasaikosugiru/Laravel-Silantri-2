@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -121,6 +121,21 @@ return [
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
+    ],
+
+    /*
+|--------------------------------------------------------------------------
+| Data Pesantren
+|--------------------------------------------------------------------------
+*/
+    'pesantren' => [
+        'nama' => 'Pondok Pesantren Modern Al-Hasyimiyah',
+        'alamat' => 'Jl. Sunan Gunung Jati No.12 Tegalratu, Kec. Ciwandan, Kota Cilegon, Banten',
+        'telp' => '(+62)878-7358-8138',
+        'email' => 'info@pesantren.sch.id',
+        'logo' => public_path('images/logo.jpeg'),
+        'kepala' => 'Muhammad Warits, S.Kom.',
+        'nip' => '19800101 200501 1 001',
     ],
 
 ];

@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'fonnte' => [
+        'token' => env('FONNTE_TOKEN'),
+    ],
+
+    'kepala_pengasuhan' => [
+        'phone' => env('KEPALA_PENGASUHAN_PHONE'),
+    ],
 ];

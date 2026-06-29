@@ -20,6 +20,7 @@ class SantriInfolist
                     ->schema([
                         ImageEntry::make('file_path')
                             ->imageSize(250)
+                            ->disk('public')
                             ->hiddenLabel(),
                     ])
                     ->columnSpan(1),

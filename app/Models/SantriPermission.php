@@ -12,7 +12,7 @@ class SantriPermission extends Model
             'santri_id',
             'type_permission',
             'date_started',
-            'ticket_permission',
+            'ticket_permission',//pulang,keluar,lainnya
             'date_ended',
             'reason',
             'submitted_by',
@@ -24,6 +24,14 @@ class SantriPermission extends Model
             'approved_by',
             'date_approved',
         ];
+
+
+    protected $casts = [
+        'date_started' => 'datetime',
+        'date_ended' => 'datetime',
+        'date_approved' => 'datetime',
+    ];
+
 
     public function santriReqPermission(): BelongsTo
     {

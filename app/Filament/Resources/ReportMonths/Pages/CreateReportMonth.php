@@ -13,6 +13,6 @@ class CreateReportMonth extends CreateRecord
     protected static string $resource = ReportMonthResource::class;
     protected function afterCreate(): void
     {
-        ReportMonthService::generate($this->record);
+        app(ReportMonthService::class)->generate($this->record);
     }
 }

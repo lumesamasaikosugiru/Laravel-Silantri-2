@@ -25,6 +25,7 @@ class SantriForm
                             ->schema([
                                 FileUpload::make('file_path')
                                     ->hiddenLabel()
+                                    ->disk('public')
                                     ->directory('FotoSantri')
                                     ->required(fn($operation) => $operation === 'create'),
                             ])

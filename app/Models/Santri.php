@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Santri extends Model
@@ -45,8 +46,23 @@ class Santri extends Model
         return $this->hasMany(ViolationDetail::class, 'santri_id');
     }
 
-    public function santris(): HasMany
+    public function reportMonthDetails(): HasMany
     {
         return $this->hasMany(ReportMonthDetail::class, 'santri_id');
+    }
+
+    //belongsMany
+    public function waliSantris(): BelongsToMany
+    {
+        return $this->belongsToMany(WaliSantri::class, 'wali_santri_santri', 'santri_id', 'wali_santri_id')
+            ->withPivot('relation')
+            ->withTimestamps();
+    }
+
+    public function getPhotoUrlAttribute(): ?string
+    {
+        return $this->file_path
+            ? asset('storage/' . $this->file_path)
+            : null;
     }
 }

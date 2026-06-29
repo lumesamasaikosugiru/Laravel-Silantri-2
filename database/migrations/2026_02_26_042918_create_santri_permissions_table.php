@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('reason', 50);
             $table->enum('submitted_by', ['wali_santri', 'staf']);
             $table->string('wali_name', 30)->nullable();
-            $table->string('wali_phone', 15)->nullable();
+            $table->string('wali_phone', 20)->nullable();
             $table->enum('wali_relation', [
                 'orangtua',
                 'saudara_kandung',
