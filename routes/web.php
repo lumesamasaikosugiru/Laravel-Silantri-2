@@ -38,6 +38,7 @@ Route::prefix('wali')->name('wali.')->group(function () {
 
     // Dashboard (dengan middleware wali.auth) — akan diisi di Tahap 6
     Route::middleware('wali.auth')->group(function () {
-        // Route::get('/dashboard', [WaliDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [WaliDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard/santri/{santriId}', [WaliDashboardController::class, 'showSantri'])->name('dashboard.santri');
     });
 });
