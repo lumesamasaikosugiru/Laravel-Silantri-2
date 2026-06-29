@@ -13,6 +13,9 @@ class FonnteService
     public function __construct()
     {
         $this->token = config('services.fonnte.token');
+        if (empty($this->token)) {
+            \Log::warning('FONNTE_TOKEN belum dikonfigurasi di .env');
+        }
     }
 
     /**
@@ -93,4 +96,6 @@ class FonnteService
 
         return $phone;
     }
+
+
 }
