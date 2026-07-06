@@ -13,6 +13,7 @@ class Violation extends Model
             'name',
             'category',
             'point',
+            'sanction',
         ];
 
     public function violationDetails(): HasMany

@@ -22,6 +22,8 @@ class ViolationForm
                 TextInput::make('point')
                     ->required()
                     ->numeric(),
+                TextInput::make('sanction')
+                    ->required()
             ]);
     }
 }

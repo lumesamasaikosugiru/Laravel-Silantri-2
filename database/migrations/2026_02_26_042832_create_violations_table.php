@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('name');
             $table->enum('category', ['ringan', 'sedang', 'berat']);
             $table->unsignedSmallInteger('point');
+            $table->string('sanction')->nullable();
             $table->timestamps();
         });
     }

@@ -27,6 +27,8 @@ class ViolationsTable
                 TextColumn::make('point')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('sanction')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
