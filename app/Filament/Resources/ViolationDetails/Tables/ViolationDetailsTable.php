@@ -34,6 +34,9 @@ class ViolationDetailsTable
                     ->label('Tanggal')
                     ->date()
                     ->sortable(),
+                TextColumn::make('violation.sanction')
+                    ->label('Sanksi')
+                    ->sortable(),
                 TextColumn::make('userInput.name')
                     ->label('Petugas Input')
                     ->numeric()
